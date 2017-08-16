@@ -83,7 +83,6 @@ articleView.handleMainNav = function() {
   //       data available to you on the .tab element that was clicked.
   $('.main-nav li').on('click', function() {
     var $val = $(this).data('content');
-    console.log($val);
 
     $('#articles, #about').hide();
     $('#' + $val).show();
