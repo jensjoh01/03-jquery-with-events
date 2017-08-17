@@ -83,7 +83,6 @@ articleView.handleMainNav = function() {
   //       data available to you on the .tab element that was clicked.
   $('.main-nav li').on('click', function() {
     var $val = $(this).data('content');
-    console.log($val);
 
     $('#articles, #about').hide();
     $('#' + $val).show();
@@ -104,12 +103,22 @@ articleView.setTeasers = function() {
   //       process any .read-on clicks that happen within child nodes.
 
   // STRETCH GOAl!: change the 'Read On' link to 'Show Less'
-
-  $('#articles').on('click', 'a.read-on', function(e) {
-    e.preventDefault();
-    $(this).siblings('.article-body').children('p').show();
-  });
 };
+$('#articles').on('click', 'a.read-on', showMore)
+
+function showMore(e) {
+  e.preventDefault();
+  $(this).siblings('.article-body').children('p').show();
+  $(this).html('Show Less &larr;');
+  $('#articles').on('click', 'a.read-on', showLess)
+}
+
+function showLess(e){
+  e.preventDefault();
+  $(this).siblings('.article-body').children('*:nth-of-type(n+2)').hide();
+  $(this).html('Show More &rarr;');
+  $('#articles').on('click', 'a.read-on', showMore)
+}
 
 // DONE: Call all of the above functions, once we are sure the DOM is ready.
 $(document).ready(function() {
